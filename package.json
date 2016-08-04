@@ -1,0 +1,48 @@
+{
+  "name": "date-utils",
+  "version": "1.0.0",
+  "description": "A practical Date handling utils for ECMAScript/Javascript",
+  "main": "dist/date-utils.js",
+  "scripts": {
+    "build-dist": "webpack --config webpack.config.js --progress --colors",
+    "build": "npm run build-dist&&export NODE_ENV=production&&npm run build-dist",
+    "prepublish": "npm run build",
+    "test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register test/DateUtils.test.js",
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swenyang/date-utils.git"
+  },
+  "keywords": [
+    "javascript",
+    "ecmascript",
+    "date",
+    "server",
+    "utils",
+    "format"
+  ],
+  "author": "swenyang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/swenyang/date-utils/issues"
+  },
+  "homepage": "https://github.com/swenyang/date-utils#readme",
+  "dependencies": {
+    "chai": "^3.5.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.11.4",
+    "babel-eslint": "^6.1.2",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-class-properties": "^6.11.5",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
+    "babel-preset-es2015": "^6.9.0",
+    "eslint": "^3.2.2",
+    "eslint-config-airbnb": "^10.0.0",
+    "eslint-plugin-import": "^1.12.0",
+    "eslint-plugin-jsx-a11y": "^2.0.1",
+    "eslint-plugin-react": "^6.0.0",
+    "mocha": "^3.0.0",
+    "webpack": "^1.13.1"
+  }
+}
