@@ -5,7 +5,7 @@ var isProd = process.env.NODE_ENV === 'production'
 
 var config = {
     entry: {
-        "date-utils": ["./src/DateUtils.js"],
+        "date-utils": ["./src/dateUtils.js"],
     },
     externals: {
     },

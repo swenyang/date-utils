@@ -283,7 +283,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @returns {number}
 	     */
 	    age: function age(date) {
-	        var addAgeAfterBirthday = arguments.length <= 1 || arguments[1] === undefined ? true : arguments[1];
+	        var addAgeAfterBirthday = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
 
 	        var birthday = dateUtils.clone(date);
 	        if (!birthday) {

@@ -7,7 +7,7 @@
     "build-dist": "webpack --config webpack.config.js --progress --colors",
     "build": "npm run build-dist&&export NODE_ENV=production&&npm run build-dist",
     "prepublish": "npm run build",
-    "test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register test/DateUtils.test.js",
+    "test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register test/dateUtils.test.js"
   },
   "repository": {
     "type": "git",
