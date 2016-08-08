@@ -1,5 +1,5 @@
 # dateUtils
-Practical Date handling utilities for ECMAScript/Javascript. Main features include server time synchronizing, date clearing, date adding, age calcuation, date formatting etc.
+Practical Date handling utilities for ECMAScript/Javascript. Main features include server time synchronizing, date clearing, date adding, age calcuation and date formatting etc.
 
 ## How to use
 
@@ -81,7 +81,7 @@ Clones and returns a date from given `param`. A `param` could be one of the four
 
 Store the server time and use it as a seed to generate new `Date` Object later. `dateUtils` would keep a copy of both server time and system time.
 
-When `now()` is called, a system time delta will be added based on the server time. The delta should be positive, in case client modifies system time backward.
+When `now()` is called, a system time delta will be added to new `Date`(based on the server time). The delta should be positive, in case client modifies system time backward.
 
 ```js
 dateUtils.seed('2016-08-08') // Mon Aug 08 2016 08:00:00 GMT+0800 (CST)
@@ -97,7 +97,7 @@ dateUtils.resetSeed()
 
 ### `now()`
 
-Return a new `Date` Object based on the seed, plussing time elapsed since `seed()` is called. If no seed is set, system time is used instead.
+Return a new `Date` Object based on the seed, plussing the time elapsed since `seed()` is called. If no seed is set, system time is used instead.
 
 ```js
 dateUtils.now() // Mon Aug 08 2016 08:00:10 GMT+0800 (CST)
@@ -112,11 +112,8 @@ e.g. if given `type = dateUtils.DATE`, the parts below `DATE` (i.e. hours/minute
 `type` is arrange by `YEAR` \> `MONTH` \> `DATE` \> `HOUR` \> `MINUTE` \> `SECOND` \> `MILLISECOND`.
 
 ```js
-const now = dateUtils.now()
-// Mon Aug 08 2016 08:00:10 GMT+0800 (CST)
-
-dateUtils.clear(now, dateUtils.MONTH)
-// Mon Aug 01 2016 00:00:00 GMT+0800 (CST)
+const now = dateUtils.now() // Mon Aug 08 2016 08:00:10 GMT+0800 (CST)
+dateUtils.clear(now, dateUtils.MONTH) // Mon Aug 01 2016 00:00:00 GMT+0800 (CST)
 ```
 
 ### `daysInMonth(year, month)`
@@ -146,47 +143,28 @@ Add a certain period of a certain date type to `date`.
 
 `num` could be either negative of positive.
 
-`type` is one the seven date types, and `dateUtils` would handle it automatically.
+`type` is one the seven date types, and `dateUtils` will handle it automatically.
 
-In some situation, date adding should exclude the last day, `excludeEndDate` is used to do it. It only works with `num > 0` and `type = YEAR/MONTH/DATE`.
+In some situation, date adding should exclude the last day, `excludeEndDate` is designed to do it. It only works with `num > 0` and `type = YEAR/MONTH/DATE`.
 
 ```js
-const now = dateUtils.now()
-// Mon Aug 08 2016 08:06:52 GMT+0800 (CST)
-
-dateUtils.add(now, 1, dateUtils.DATE)
-// Tue Aug 09 2016 08:00:00 GMT+0800 (CST)
-
-dateUtils.add(now, 1, dateUtils.DATE, true)
-// Mon Aug 08 2016 08:06:52 GMT+0800 (CST)
-
-dateUtils.add(now, -10, dateUtils.DATE)
-// Fri Jul 29 2016 08:00:00 GMT+0800 (CST)
-
-dateUtils.add(now, 2, dateUtils.MONTH)
-// Sat Oct 08 2016 08:06:52 GMT+0800 (CST)
-
-dateUtils.add(now, 2, dateUtils.MONTH, true)
-// Fri Oct 07 2016 08:06:52 GMT+0800 (CST)
-
-dateUtils.add(now, -5, dateUtils.MONTH)
- // Tue Mar 08 2016 08:06:52 GMT+0800 (CST)
-
-dateUtils.add(now, 16, dateUtils.YEAR)
-// Sun Aug 08 2032 08:06:52 GMT+0800 (CST)
-
-dateUtils.add(now, 16, dateUtils.YEAR, true)
-// Sat Aug 07 2032 08:06:52 GMT+0800 (CST)
-
-dateUtils.add(now, -7, dateUtils.YEAR)
-// Sat Aug 08 2009 08:06:52 GMT+0800 (CST)
+const now = dateUtils.now() // Mon Aug 08 2016 08:06:52 GMT+0800 (CST)
+dateUtils.add(now, 1, dateUtils.DATE) // Tue Aug 09 2016 08:00:00 GMT+0800 (CST)
+dateUtils.add(now, 1, dateUtils.DATE, true) // Mon Aug 08 2016 08:06:52 GMT+0800 (CST)
+dateUtils.add(now, -10, dateUtils.DATE) // Fri Jul 29 2016 08:00:00 GMT+0800 (CST)
+dateUtils.add(now, 2, dateUtils.MONTH) // Sat Oct 08 2016 08:06:52 GMT+0800 (CST)
+dateUtils.add(now, 2, dateUtils.MONTH, true) // Fri Oct 07 2016 08:06:52 GMT+0800 (CST)
+dateUtils.add(now, -5, dateUtils.MONTH) // Tue Mar 08 2016 08:06:52 GMT+0800 (CST)
+dateUtils.add(now, 16, dateUtils.YEAR) // Sun Aug 08 2032 08:06:52 GMT+0800 (CST)
+dateUtils.add(now, 16, dateUtils.YEAR, true) // Sat Aug 07 2032 08:06:52 GMT+0800 (CST)
+dateUtils.add(now, -7, dateUtils.YEAR) // Sat Aug 08 2009 08:06:52 GMT+0800 (CST)
 ```
 
 ### `age(date, addAgeAfterBirthday = false)`
 
-Calculate the age of given `date`. Note that end date uses `dateUtils.now()`, thus you can modified seed to test.
+Calculate the age of given `date`. Note that end date uses `dateUtils.now()`, thus you can modified seed to test it.
 
-In most cases, we add age by 1 on birthday. However, in some situation, you may add age by 1 at the day after the birthday by setting `addAgeAfterBirthday = true`.
+In most cases, we add age by one on birthday. However, in some situations, you may need to add age by one at the day after the birthday, then set `addAgeAfterBirthday` to `true`.
 
 ```js
 const now = dateUtils.now()
@@ -222,7 +200,7 @@ dateUtils.padZero(100, 3) // '100'
 
 ### `format(date, format)`
 
-Return a string by formatting given `date`. `format()` would search below strings in `format` param and replace them with locale time, such as `date.getDate()`, `date.getHours()`, `date.Minutes()`.
+Return a string by formatting given `date`. `format()` would search below strings in `format` param and replace them with local time, such as `date.getDate()`, `date.getHours()`, `date.Minutes()`.
 
 - `SSS` milliseconds with leading 0
 - `S` milliseconds without leading 0
@@ -242,11 +220,8 @@ Return a string by formatting given `date`. `format()` would search below string
 - `yy` two-digit year
 
 ```js
-dateUtils.seed('2016-08-09')
-// Tue Aug 09 2016 08:00:00 GMT+0800 (CST)
-const now = dateUtils.now()
-// Tue Aug 09 2016 08:00:21 GMT+0800 (CST)
-
+dateUtils.seed('2016-08-09') // Tue Aug 09 2016 08:00:00 GMT+0800 (CST)
+const now = dateUtils.now() // Tue Aug 09 2016 08:00:21 GMT+0800 (CST)
 dateUtils.format(now, 'yyyy-MM-dd') // '2016-08-09'
 dateUtils.format(now, 'yyyy-MM-dd HH:mm:ss.SSS') // '2016-08-09 08:00:21.942'
 dateUtils.format(now, 'M-d-yy') // '8-9-16'
@@ -257,4 +232,7 @@ dateUtils.format(now, 'dd/MM HH:mm') // '09/08 08:00'
 
 ## TODO
 
-- `date.format()` should consider more about locale setting.
+- `date.format()` should consider more about locale settings.
+
+[5]: https://www.w3.org/TR/NOTE-datetime
+[6]: http://tools.ietf.org/html/rfc2822#section-3.3
