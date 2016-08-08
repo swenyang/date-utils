@@ -313,14 +313,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    /**
 	     * pad a number to fixed length with zero
-	     * @param val
+	     * @param number
 	     * @param digits
 	     * @returns {string}
 	     */
-	    padZero: function padZero(val) {
+	    padZero: function padZero(number) {
 	        var digits = arguments.length <= 1 || arguments[1] === undefined ? 2 : arguments[1];
 
-	        var ret = val.toString();
+	        var ret = number.toString();
 	        for (var i = ret.length; i < digits; i++) {
 	            ret = '0' + ret;
 	        }

@@ -242,12 +242,12 @@ const dateUtils = {
 
     /**
      * pad a number to fixed length with zero
-     * @param val
+     * @param number
      * @param digits
      * @returns {string}
      */
-    padZero: (val, digits = 2) => {
-        let ret = val.toString()
+    padZero: (number, digits = 2) => {
+        let ret = number.toString()
         for (let i = ret.length; i < digits; i++) {
             ret = `0${ret}`
         }

@@ -131,12 +131,13 @@ describe('Test dateUtils.daysInMonth()', () => {
 
 describe('Test dateUtils.isLeapYear()', () => {
     it('test leap year', () => {
-        expect(dateUtils.isLeapYear(2011)).to.not.be.ok
-        expect(dateUtils.isLeapYear(2010)).to.not.be.ok
-        expect(dateUtils.isLeapYear(2100)).to.not.be.ok
-        expect(dateUtils.isLeapYear(2000)).to.be.ok
-        expect(dateUtils.isLeapYear(2012)).to.be.ok
-        expect(dateUtils.isLeapYear(1988)).to.be.ok
+        let r = expect(dateUtils.isLeapYear(2011)).to.not.be.ok
+        r = expect(dateUtils.isLeapYear(2010)).to.not.be.ok
+        r = expect(dateUtils.isLeapYear(2100)).to.not.be.ok
+        r = expect(dateUtils.isLeapYear(2000)).to.be.ok
+        r = expect(dateUtils.isLeapYear(2012)).to.be.ok
+        r = expect(dateUtils.isLeapYear(1988)).to.be.ok
+        return r
     })
 })
 
@@ -227,7 +228,7 @@ describe('Test dateUtils.add()', () => {
         expect(dateUtils.add(date2, 100, dateUtils.MILLISECOND).getTime()).to.be.equal(new Date('2016-10-15T14:23:06.234Z').getTime())
         expect(dateUtils.add(date2, -50, dateUtils.SECOND).getTime()).to.be.equal(new Date('2016-10-15T14:22:16.134Z').getTime())
         expect(dateUtils.add(date2, 100, dateUtils.SECOND).getTime()).to.be.equal(new Date('2016-10-15T14:24:46.134Z').getTime())
-        expect(dateUtils.add(date2, -50, dateUtils  .MINUTE).getTime()).to.be.equal(new Date('2016-10-15T13:33:06.134Z').getTime())
+        expect(dateUtils.add(date2, -50, dateUtils.MINUTE).getTime()).to.be.equal(new Date('2016-10-15T13:33:06.134Z').getTime())
         expect(dateUtils.add(date2, 100, dateUtils.MINUTE).getTime()).to.be.equal(new Date('2016-10-15T16:03:06.134Z').getTime())
         expect(dateUtils.add(date2, -50, dateUtils.HOUR).getTime()).to.be.equal(new Date('2016-10-13T12:23:06.134Z').getTime())
         expect(dateUtils.add(date2, 100, dateUtils.HOUR).getTime()).to.be.equal(new Date('2016-10-19T18:23:06.134Z').getTime())

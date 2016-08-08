@@ -1,13 +1,14 @@
 {
-  "name": "date-utils",
-  "version": "1.0.0",
-  "description": "A practical Date handling utils for ECMAScript/Javascript",
+  "name": "es-date-utils",
+  "version": "0.0.1",
+  "description": "Practical Date handling utils for ECMAScript/Javascript",
   "main": "dist/date-utils.js",
   "scripts": {
     "build-dist": "webpack --config webpack.config.js --progress --colors",
-    "build": "npm run build-dist&&export NODE_ENV=production&&npm run build-dist",
+    "build": "npm run lint && npm run build-dist&&export NODE_ENV=production&&npm run build-dist",
     "prepublish": "npm run build",
-    "test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register test/dateUtils.test.js"
+    "test": "npm run lint && ./node_modules/mocha/bin/mocha --compilers js:babel-core/register test/dateUtils.test.js",
+    "lint": "./node_modules/.bin/eslint src/* test/*"
   },
   "repository": {
     "type": "git",
